@@ -1,4 +1,4 @@
-package com.nshimiye.cqrs.reader.akka;
+package com.nshimiye.akka;
 
 import akka.actor.ActorSystem;
 

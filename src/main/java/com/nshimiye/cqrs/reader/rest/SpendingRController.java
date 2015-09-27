@@ -12,8 +12,8 @@ import akka.actor.ActorSelection;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 
+import com.nshimiye.akka.AkkaFactory;
 import com.nshimiye.cprs.reader.domain.Spending;
-import com.nshimiye.cqrs.reader.akka.AkkaFactory;
 import com.nshimiye.cqrs.reader.akka.ReadWorker;
 
 @RestController

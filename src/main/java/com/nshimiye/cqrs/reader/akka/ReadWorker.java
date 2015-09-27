@@ -35,6 +35,10 @@ public class ReadWorker extends UntypedActor {
             System.out.println("[ ReadWorker ] done reading from db");
             getSender().tell(spending, getSelf());
         
+        } else if (message instanceof com.nshimiye.cqrs.writer.domain.Spending) { 
+        	// 
+        	System.out.println("[ ReadWorker ] done writing to db");
+        	
         } else
             unhandled(message);
     }

@@ -5,6 +5,7 @@ import akka.actor.UntypedActor;
 import scala.collection.mutable.ArraySeq;
 
 import com.nshimiye.cqrs.writer.domain.Spending;
+import com.nshimiye.messaging.Envelope;
 
 /**
  * In charge of factorial calculation 
@@ -17,17 +18,19 @@ public class WriteWorker extends UntypedActor {
 
     @Override
     public void onReceive(Object message) {
-        if (message instanceof Spending) {
+    	
+    	if (message instanceof Spending) {
         
             //1. accomplish the task in hand   
             
             //in this example, we save food and amount to db (list)
-        	Database.write( (Spending) message );
+    		Spending savedEntity = Database.write( (Spending) message );
             
             //2. After the task is "completely" done,
             //   send notification to kafka
             System.out.println("[ WriteWorker ] done writing to db");
-            // getSender().tell(new Result(bigInt), getSelf());
+            Envelope envelope = new Envelope("NewEntry", savedEntity);
+            getContext().system().eventStream().publish(envelope);
         
         } else
             unhandled(message);
