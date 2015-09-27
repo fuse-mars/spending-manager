@@ -22,7 +22,7 @@ public class WriteWorker extends UntypedActor {
             //1. accomplish the task in hand   
             
             //in this example, we save food and amount to db (list)
-            Database.write( (Spending) message );
+        	Database.write( (Spending) message );
             
             //2. After the task is "completely" done,
             //   send notification to kafka

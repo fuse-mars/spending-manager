@@ -33,6 +33,7 @@ public class SpendingWController {
 
         long count = counter.incrementAndGet();
         // send a command to save this information
+        //non-blocking call uses "tell"
         writeWorker.tell(
             new Spending(count, name, amount),
             ActorRef.noSender()

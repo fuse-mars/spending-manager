@@ -4,7 +4,7 @@ import akka.actor.Props;
 import akka.actor.UntypedActor;
 import scala.collection.mutable.ArraySeq;
 
-import com.nshimiye.reader.domain.Spending;
+import com.nshimiye.cprs.reader.domain.Spending;
 
 /**
  * In charge of factorial calculation 
@@ -12,8 +12,8 @@ import com.nshimiye.reader.domain.Spending;
  */
 public class ReadWorker extends UntypedActor {
 
-    private static Spending spending = null;
-    public static Spending getValue() {
+    private Spending spending = null;
+    public Spending getValue() {
         return spending;
     }
 
@@ -25,12 +25,15 @@ public class ReadWorker extends UntypedActor {
             
             //in this example, we read the requested value 
             // saves it into a static variable
-            ReadWorker.spending = Database.read((Long) message);
+            spending = Database.read((Long) message);
+            if(spending == null){
+            	spending = new Spending((Long)message, null, 0);
+            }
             
             //2. After the task is "completely" done,
             //   send notification to kafka
             System.out.println("[ ReadWorker ] done reading from db");
-            // getSender().tell(new Result(bigInt), getSelf());
+            getSender().tell(spending, getSelf());
         
         } else
             unhandled(message);

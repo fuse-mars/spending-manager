@@ -1,4 +1,4 @@
-package com.nshimiye.reader.domain;
+package com.nshimiye.cprs.reader.domain;
 
 //money spend on lunch or dinner
 public class Spending {

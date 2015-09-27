@@ -3,7 +3,7 @@ package com.nshimiye.cqrs.reader.akka;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
-import com.nshimiye.reader.domain.Spending;
+import com.nshimiye.cprs.reader.domain.Spending;
 
 public class Database{
 
