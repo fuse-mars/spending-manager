@@ -1,4 +1,4 @@
-# spring-akka
+# spring-boot-101
 Spring project that uses Akka internally 
 
 ## Value
